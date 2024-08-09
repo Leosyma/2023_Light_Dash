@@ -36,7 +36,7 @@ def load_data():
 
 
 # Leitura das áreas de riscos
-shp_AR = gpd.read_file(r'Dados\AR - Areas de Risco\ASRO\ASRO.shp')
+shp_AR = gpd.read_file(r'ASRO.shp')
 
 # Definição de diferentes tipos de mapas base
 basemaps = {
