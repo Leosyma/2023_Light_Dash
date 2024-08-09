@@ -24,10 +24,10 @@ from PIL import Image
 # Função para carregar os dados dos trechos dos alimentadores.
 @st.cache_data
 def load_data():
-    resultados_fme = pd.read_pickle( 'LI_REDE_PF_TRECHO_MT_concatenado.pkl')
+    resultados_fme = pd.read_pickle('LI_REDE_PF_TRECHO_MT_concatenado.pkl')
     resultados_fme = resultados_fme[['STATUSIN','CODIGO','COMPRIME','geometry','Nome_Subpasta']]
     resultados_fme = resultados_fme.rename(columns={'Nome_Subpasta':'LINHA'})
-    escopo = pd.read_excel(r'C:\Users\leosy\Light\Inventário 1º Onda 2023_Light - General\01 - Frentes do Inventário\01 - Inventário de Postes\03 - Escopo\ALIM VALIDADOS - 09.05.2024.xlsx',header=1,usecols='B,C,E',sheet_name='DADOS')
+    escopo = pd.read_excel(r'ALIM VALIDADOS - 09.05.2024.xlsx',header=1,usecols='B,C,E',sheet_name='DADOS')
     resultados_fme = resultados_fme.merge(escopo,how='left',left_on='LINHA',right_on='ALIMENTADOR')
     resultados_fme = resultados_fme.fillna('-')
     
