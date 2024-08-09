@@ -76,7 +76,7 @@ basemaps = {
 st.set_page_config(layout="wide")
 
 # Carrega a imagem do logotipo e exibe no topo da página
-image = Image.open(r'Dados\Logo LIGHT\logo.png')
+image = Image.open(r'logo.png')
 col1, col2, col3 = st.columns(3)
 with col2:
     st.image(image)
