@@ -15,7 +15,6 @@ from shapely.ops import unary_union
 import os
 from shapely import wkt
 import streamlit_authenticator as stauth
-from time import sleep
 import yaml
 from yaml.loader import SafeLoader
 from PIL import Image
