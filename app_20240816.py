@@ -21,9 +21,9 @@ from PIL import Image
 import shutil
 
 # Copia o arquivo dos trechos MT concatenados para a pasta do GITHUB
-src = r'C:\Projetos\2022_23_LIGHT_Sust_Concessao\Fase 1\3 - Resultados\Delos\19-06-2024\Concat\LI_REDE_PF_TRECHO_MT_concatenado.pkl'
-dst = r'C:\Users\leosy\OneDrive\Documentos\GitHub\2023_Light_Dash\Dados\LINHAS\LI_REDE_PF_TRECHO_MT_concatenado.pkl'
-shutil.copyfile(src, dst)
+# src = r'C:\Projetos\2022_23_LIGHT_Sust_Concessao\Fase 1\3 - Resultados\Delos\19-06-2024\Concat\LI_REDE_PF_TRECHO_MT_concatenado.pkl'
+# dst = r'C:\Users\leosy\OneDrive\Documentos\GitHub\2023_Light_Dash\Dados\LINHAS\LI_REDE_PF_TRECHO_MT_concatenado.pkl'
+# shutil.copyfile(src, dst)
 
 # Função para carregar os dados dos trechos dos alimentadores.
 @st.cache_data
