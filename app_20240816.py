@@ -117,12 +117,13 @@ if authentication_status:
     st.write(f'Welcome *{name}*')
 
     # Criação das abas do Streamlit
-    tab1, tab2 = st.tabs(["Painel Gerencial", "Mapa - Levantamento em Campo"])
+    tab1, tab2 = st.tabs(["Dashboard", "Mapa - Levantamento em Campo"])
 
     # Conteúdo da aba "Painel Gerencial"
     with tab1:
-        st.title('Dashboard - Inventário de Ativos')
-        st.markdown('https://app.powerbi.com/groups/me/reports/47e643db-3236-4b89-8250-73aa0384c51d/ReportSection?ctid=0c6c23de-546b-45ff-811a-a88cc514ae5f&experience=power-bi',unsafe_allow_html=True)
+        # st.markdown('https://app.powerbi.com/groups/me/reports/47e643db-3236-4b89-8250-73aa0384c51d/ReportSection?ctid=0c6c23de-546b-45ff-811a-a88cc514ae5f&experience=power-bi',unsafe_allow_html=True)
+        link = 'https://app.powerbi.com/groups/me/reports/47e643db-3236-4b89-8250-73aa0384c51d/ReportSection?ctid=0c6c23de-546b-45ff-811a-a88cc514ae5f&experience=power-bi'
+        st.link_button('Link Dashboard', link)
 
     # Conteúdo da aba "Mapas"
     with tab2:
