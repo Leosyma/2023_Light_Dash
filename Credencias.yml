@@ -44,6 +44,10 @@ credentials:
       email: alexandre.baldini@light.com.br
       name: Alexandre Baldini
       password: $2b$12$N5ZVPI3QHIOeAnndOLnsje9RUduwrpDIBBUxS8uKZ3KEnjvdugDV2 # To be replaced with hashed password
+    rmarques:
+      email: rafael.marques@light.com.br
+      name: Rafael Marques
+      password: $2b$12$Zpl98jVveVZJNEwU6O/V8uGubIcaU3/Y3mjayMXA86G.4Is37LzMe # To be replaced with hashed password
       
 cookie:
   expiry_days: 0
