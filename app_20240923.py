@@ -138,6 +138,9 @@ if authentication_status:
         # Adiciona um espaço em branco para mover o select box para a direita
         st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction: row-reverse}</style>', unsafe_allow_html=True)
 
+        # Criação do select box para escolher entre "Trecho", "Poste" ou "Ambos"
+        tipo_selecionado = st.selectbox("Selecione o tipo de ativo:", ["Trecho", "Poste", "Ambos"])
+
         # Criação do select box para selecionar a "Regional"
         sel_regioes = resultados_fme['REGIONAL'].unique().astype('str').tolist()
         all_regioes = sel_regioes.copy()
@@ -202,15 +205,22 @@ if authentication_status:
         regiao_df = regiao_df[regiao_df['STATUSIN'].isin(status)]
         regiao_postes_df = regiao_postes_df[regiao_postes_df['STATUSIN'].isin(status)]
 
-        # Botões de filtro para escolher entre Trechos e Postes
-        ver_trechos = st.checkbox("Mostrar Trechos", value=True)
-        ver_postes = st.checkbox("Mostrar Postes", value=True)
-
+        # Filtra os dados de acordo com o tipo selecionado
+        if tipo_selecionado == "Trecho":
+            regiao_postes_df = pd.DataFrame()  # Limpa os dados de postes
+        elif tipo_selecionado == "Poste":
+            regiao_df = pd.DataFrame()  # Limpa os dados de trechos
 
         with st.spinner("Carregando mapa..."):
             # Calcula o centróide para centralizar o mapa
-            centroide = regiao_df.to_crs(22182).centroid.to_crs(4326).iloc[[0]]
-            mapa = folium.Map(location=[centroide.y, centroide.x], zoom_start=13)
+            if not regiao_df.empty:
+                centroide = regiao_df.to_crs(22182).centroid.to_crs(4326).iloc[[0]]
+                mapa = folium.Map(location=[centroide.y, centroide.x], zoom_start=13)
+            elif not regiao_postes_df.empty:
+                centroide = regiao_postes_df.to_crs(22182).centroid.to_crs(4326).iloc[[0]]
+                mapa = folium.Map(location=[centroide.y, centroide.x], zoom_start=13)
+            else:
+                mapa = folium.Map(location=[-23.5505, -46.6333], zoom_start=13)  # Mapa padrão
 
             # Adicionar basemaps ao mapa
             for name, tile_layer in basemaps.items():
@@ -245,14 +255,15 @@ if authentication_status:
             macro._template = branca.element.Template(legend_html)
             mapa.add_child(macro)
 
-            # Adicionar GeoJson ao mapa com base na coluna de cor
-            GeoJson(regiao_df, style_function=lambda feature: {'color': feature['properties']['cor'], 'weight': 2},name='ALIMENTADOR').add_to(mapa)
+            # Verificação antes de adicionar GeoJson
+            if not regiao_df.empty and not regiao_df['geometry'].isnull().all():
+                GeoJson(regiao_df, style_function=lambda feature: {'color': feature['properties']['cor'], 'weight': 2}, name='ALIMENTADOR').add_to(mapa)
 
-            # Adicionar GeoJson para os postes
-            GeoJson(regiao_postes_df, 
-                style_function=lambda feature: {'color': feature['properties']['cor'], 'radius': 1, 'fill': True}, 
-                marker=folium.CircleMarker(radius=4, color='red', fill=True),
-                name='POSTES').add_to(mapa)
+            if not regiao_postes_df.empty and not regiao_postes_df['geometry'].isnull().all():
+                GeoJson(regiao_postes_df, 
+                    style_function=lambda feature: {'color': feature['properties']['cor'], 'radius': 1, 'fill': True}, 
+                    marker=folium.CircleMarker(radius=4, color='red', fill=True),
+                    name='POSTES').add_to(mapa)
 
         # Adiciona controle de camadas ao mapa
         folium.LayerControl().add_to(mapa)
