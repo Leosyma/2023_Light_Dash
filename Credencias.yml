@@ -4,6 +4,10 @@ credentials:
       email: lsyma@caldenconsultoria.com
       name: Leonardo Syma
       password: $2b$12$GSJkaUN.XLsiPsZCj.SG/u4UbjQVdC7v/GHbotV8qyQthZr.5VDFq # To be replaced with hashed password
+    palmeida:
+      email: palmeida@caldenconsultoria.com
+      name: Pedro Almeida
+      password: $2b$12$DAZLkgeQEABEF1IFaoEooueN5rlzzljoq9DSVuoB16pv3EBfwQA3i # To be replaced with hashed password
     dmendes:
       email: dmendes@caldenconsultoria.com
       name: Diogo Mendes
